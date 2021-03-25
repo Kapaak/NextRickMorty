@@ -1,48 +1,40 @@
 import styled from "styled-components";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+
 //components
-import Button from "./components/Button";
-import Input from "./components/Input";
+import HomeHeadline from "../components/HomeHeadline";
+//styles
+import { StyledContainer } from "../styles/GlobalStyles";
+import Image from "next/image";
+//images
+import cloud1 from "../public/cloud1.svg";
+import cloud2 from "../public/cloud2.svg";
 
 export default function Home() {
 	const [isSearching, setIsSearching] = useState(false);
 
-	return (
-		<StyledHome>
-			<div className="headline">
-				<h2>Rick and Morty</h2>
-				<h3>character database</h3>
-			</div>
-			<div className="routes">
-				{isSearching ? (
-					<Input />
-				) : (
-					<Button
-						onClick={() => {
-							console.log("pep");
-							setIsSearching(search => !search);
-						}}
-						primary
-					>
-						search
-					</Button>
-				)}
+	const resetIsSearching = e => {
+		const isClickOutside =
+			e.target.tagName !== "BUTTON" && e.target.tagName !== "INPUT";
 
-				<Button primary>characters</Button>
-			</div>
+		if (isClickOutside) setIsSearching(false);
+	};
+
+	return (
+		<StyledHome onClick={resetIsSearching}>
+			<HomeHeadline isSearching={isSearching} setIsSearching={setIsSearching} />
+			<Image src="/../public/cloud1.svg" width={300} height={300} />
+			{/* <Image
+				src="/../public/morty.webp"
+				width={300}
+				height={300}
+				layout="responsive"
+			/> */}
 		</StyledHome>
 	);
 }
 
-const StyledHome = styled.div`
-	background-color: var(--first-color);
-	min-height: 100vh;
-	height: 100vh;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
-
+const StyledHome = styled(StyledContainer)`
 	.headline {
 		h2,
 		h3 {
