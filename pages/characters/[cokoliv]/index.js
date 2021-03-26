@@ -30,6 +30,7 @@ export default function Character({ character }) {
 					</div>
 				</div>
 				<Image
+					className="image"
 					src={character.image}
 					alt={character.name}
 					width={450}
@@ -70,17 +71,19 @@ export const getStaticPaths = async () => {
 const StyledCharacter = styled(StyledContainer)`
 	.character-container {
 		display: flex;
-		margin-right: 2rem;
+		padding: 7rem;
 		align-items: center;
 
 		.character-headline {
-			margin-right: 20rem;
+			margin-right: 12rem;
 			h2 {
 				color: var(--fourth-color);
 				font-size: 6.5rem;
 				text-transform: uppercase;
 				line-height: 1;
 				margin-bottom: 10rem;
+				width: 52rem;
+				word-break: break-all;
 			}
 			.character-info {
 				display: flex;
@@ -100,6 +103,78 @@ const StyledCharacter = styled(StyledContainer)`
 					font-size: 3rem;
 					margin-left: auto;
 					min-width: 18rem;
+				}
+			}
+		}
+	}
+
+	@media (max-width: 1200px) {
+		.character-container {
+			padding: 4rem;
+			align-items: flex-end;
+			.character-headline {
+				margin-right: 2rem;
+				h2 {
+					font-size: 5.5rem;
+				}
+
+				.character-info {
+					h3 {
+						font-size: 4.3rem;
+					}
+					h4 {
+						font-size: 2.5rem;
+					}
+				}
+			}
+		}
+	}
+	@media (max-width: 880px) {
+		.character-container {
+			flex-direction: column-reverse;
+			align-items: center;
+			.character-headline {
+				margin-right: 0rem;
+				h2 {
+					margin: 2rem 0 3rem 0;
+					font-size: 4.5rem;
+					max-width: 50rem;
+					width: 100%;
+					word-break: break-word;
+					text-align: center;
+				}
+				.character-info {
+					h3 {
+						font-size: 3.3rem;
+					}
+					h4 {
+						font-size: 2rem;
+					}
+				}
+			}
+			& > div:last-child {
+				width: 30rem;
+			}
+		}
+	}
+
+	@media (max-width: 500px) {
+		.character-container {
+			padding: 2rem;
+
+			.character-headline {
+				margin-right: 0rem;
+				h2 {
+					font-size: 5.5rem;
+				}
+
+				.character-info {
+					h3 {
+						font-size: 4.3rem;
+					}
+					h4 {
+						min-width: 10rem;
+					}
 				}
 			}
 		}

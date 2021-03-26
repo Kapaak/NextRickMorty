@@ -55,6 +55,7 @@ const StyledHome = styled(StyledContainer)`
 	.styled-img {
 		position: absolute;
 		z-index: 0;
+		transition: all 0.5s ease;
 
 		&.top-left {
 			left: 4rem;
@@ -106,6 +107,7 @@ const StyledHome = styled(StyledContainer)`
 
 	@media (max-width: 700px) {
 		.headline {
+			margin-bottom: 1rem;
 			h2 {
 				font-size: 5.5rem;
 			}
@@ -115,9 +117,16 @@ const StyledHome = styled(StyledContainer)`
 		}
 
 		.routes {
+			input {
+				padding: 0.6rem 1rem 0.9rem 2rem;
+			}
 			button {
 				font-size: 1.6rem;
 			}
+		}
+
+		.styled-img.top-left {
+			left: 30rem;
 		}
 	}
 `;
