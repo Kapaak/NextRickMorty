@@ -19,7 +19,7 @@ export default function Home() {
 
 	return (
 		<StyledHome onClick={resetIsSearching}>
-			<div>placeholder</div>
+			<div></div>
 			<div>
 				<HomeHeadline
 					isSearching={isSearching}
@@ -62,17 +62,18 @@ const StyledHome = styled(StyledContainer)`
 
 		&.top-right {
 			top: 4rem;
-			left: 100rem;
+			right: 4rem;
 		}
 		&.bottom-right {
 			bottom: 4rem;
-			left: 80rem;
+			right: 10rem;
 			transform: rotate(160deg);
 		}
 	}
 	.headline {
+		position: relative;
 		margin-top: 15rem;
-		z-index: 1;
+		z-index: 2;
 		h2,
 		h3 {
 			color: var(--fourth-color);
@@ -89,8 +90,35 @@ const StyledHome = styled(StyledContainer)`
 	}
 
 	.routes {
+		position: relative;
 		text-align: center;
 		z-index: 1;
+	}
+
+	@media (max-width: 1400px) {
+		.styled-img.top-right {
+			left: 116rem;
+		}
+		.styled-img.bottom-right {
+			left: 120rem;
+		}
+	}
+
+	@media (max-width: 700px) {
+		.headline {
+			h2 {
+				font-size: 5.5rem;
+			}
+			h3 {
+				font-size: 3.5rem;
+			}
+		}
+
+		.routes {
+			button {
+				font-size: 1.6rem;
+			}
+		}
 	}
 `;
 
