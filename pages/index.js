@@ -36,13 +36,6 @@ export default function Home() {
 				<Image src="/cloud1.svg" width={500} height={300} layout="fixed" />
 			</div>
 			<StyledCircle />
-
-			{/* <Image
-				src="/../public/morty.webp"
-				width={300}
-				height={300}
-				layout="responsive"
-			/> */}
 		</StyledHome>
 	);
 }
@@ -122,6 +115,29 @@ const StyledHome = styled(StyledContainer)`
 			}
 			button {
 				font-size: 1.6rem;
+			}
+		}
+
+		.styled-img.top-left {
+			left: 30rem;
+		}
+	}
+	@media (max-width: 500px) {
+		.headline {
+			h2 {
+				font-size: 4.5rem;
+			}
+			h3 {
+				font-size: 3rem;
+			}
+		}
+
+		.routes {
+			input {
+				padding: 0.5rem 1rem 0.8rem 2rem;
+			}
+			button {
+				font-size: 1.4rem;
 			}
 		}
 

@@ -83,11 +83,12 @@ const StyledCharacter = styled(StyledContainer)`
 				line-height: 1;
 				margin-bottom: 10rem;
 				width: 52rem;
-				word-break: break-all;
+				word-break: break-word;
 			}
 			.character-info {
 				display: flex;
 				align-items: baseline;
+				max-width: 50rem;
 				h3,
 				h4 {
 					font-weight: 400;
@@ -102,7 +103,7 @@ const StyledCharacter = styled(StyledContainer)`
 				h4 {
 					font-size: 3rem;
 					margin-left: auto;
-					min-width: 18rem;
+					min-width: 7rem;
 				}
 			}
 		}
@@ -165,15 +166,15 @@ const StyledCharacter = styled(StyledContainer)`
 			.character-headline {
 				margin-right: 0rem;
 				h2 {
-					font-size: 5.5rem;
+					font-size: 3.5rem;
 				}
 
 				.character-info {
 					h3 {
-						font-size: 4.3rem;
+						font-size: 3rem;
 					}
 					h4 {
-						min-width: 10rem;
+						font-size: 1.8rem;
 					}
 				}
 			}

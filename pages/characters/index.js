@@ -1,12 +1,16 @@
+//libraries
 import axios from "axios";
+import styled from "styled-components";
+//components
 import CharacterList from "../../components/CharacterList";
+//styles
+import { StyledContainer } from "../../styles/GlobalStyles";
 
 export default function Home({ characters }) {
-	console.log(characters);
 	return (
-		<div>
+		<StyledContainer>
 			<CharacterList characters={characters} />
-		</div>
+		</StyledContainer>
 	);
 }
 
