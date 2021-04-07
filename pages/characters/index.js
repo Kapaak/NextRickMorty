@@ -7,60 +7,74 @@ import CharacterList from "../../components/CharacterList";
 //styles
 import { StyledContainer } from "../../styles/GlobalStyles";
 
-export default function Home({ characters }) {
-	const [data, setData] = useState(characters);
-	const [counter, setCounter] = useState(1);
+const fetchData = async (setData, setPages) => {
+	const data = await axios.get("https://rickandmortyapi.com/api/character");
+	let pagesRequired = await data.data.info.pages;
+	const apiPromises = [];
 
-	const fetchData = async action => {
-		await setCounter(prev => prev + action);
-		const resp = await axios.get(
-			`https://rickandmortyapi.com/api/character?page=${counter}`
+	for (let i = pagesRequired; i > 0; i--) {
+		apiPromises.push(
+			axios.get(`https://rickandmortyapi.com/api/character?page=${i}`)
 		);
-		const data = await resp.data.results;
-		setData(data);
-	};
+	}
 
-	const fetchDataForwards = async () => {
-		if (counter < 34) {
-			console.log(counter, "plus");
+	// Promise.all(
+	// 	apiPromises.map(async api => {
+	// 		const user = await api;
+	// 		const resp = user.data.results;
+	// 		processedResponses.push(user.data.results);
+	// 		setData(prev => [...prev, resp]);
+	// 	})
+	// );
+	Promise.all(apiPromises).then(responses => {
+		const processedResponses = [];
 
-			fetchData(+1);
+		responses.map(response => {
+			processedResponses.push(response.data.results);
+		});
+		processedResponses.reverse();
+
+		setPages(pagesRequired);
+		setData(processedResponses);
+	});
+};
+
+export default function Home() {
+	const [data, setData] = useState([]);
+	const [pages, setPages] = useState([]);
+	const [counter, setCounter] = useState(0);
+
+	useEffect(() => {
+		fetchData(setData, setPages);
+		const reverseData = [...data].reverse();
+		setData(reverseData);
+	}, []);
+
+	const counterHandler = action => {
+		if (action === "INC") {
+			if (counter < pages - 1) return setCounter(prev => prev + 1);
 		}
-	};
-	const fetchDataBackwards = async () => {
-		if (counter > 0) {
-			console.log(counter, "minus");
-			fetchData(-1);
+		if (action === "DEC") {
+			if (counter > 0) return setCounter(prev => prev - 1);
 		}
 	};
 
 	return (
 		<CharactersContainer>
-			<CharacterList characters={data} />
+			{data[counter] ? <CharacterList characters={data[counter]} /> : null}
 			<div
 				className="buttons"
 				style={{ display: "flex", alignItems: "center" }}
 			>
-				<button onClick={fetchDataBackwards}>&#8678;</button>
-				<p style={{ color: "var(--second-color)" }}>{counter}</p>
-				<button onClick={fetchDataForwards}>&#8680;</button>
+				<button onClick={() => counterHandler("DEC")}>&#8678;</button>
+				<p style={{ color: "var(--second-color)" }}>
+					{counter + 1}/{pages}
+				</p>
+				<button onClick={() => counterHandler("INC")}>&#8680;</button>
 			</div>
 		</CharactersContainer>
 	);
 }
-
-export const getStaticProps = async () => {
-	const res = await axios.get(
-		`https://rickandmortyapi.com/api/character?page=1`
-	);
-	const characters = await res.data.results;
-
-	return {
-		props: {
-			characters,
-		},
-	};
-};
 
 const CharactersContainer = styled(StyledContainer)`
 	.buttons {
