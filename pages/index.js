@@ -1,6 +1,7 @@
-import styled from "styled-components";
+//libraries
 import React, { useState } from "react";
-
+import styled from "styled-components";
+import axios from "axios";
 //components
 import HomeHeadline from "../components/HomeHeadline";
 //styles
@@ -9,14 +10,12 @@ import Image from "next/image";
 
 export default function Home() {
 	const [isSearching, setIsSearching] = useState(false);
-
 	const resetIsSearching = e => {
 		const isClickOutside =
 			e.target.tagName !== "BUTTON" && e.target.tagName !== "INPUT";
 
 		if (isClickOutside) setIsSearching(false);
 	};
-
 	return (
 		<StyledHome onClick={resetIsSearching}>
 			<div></div>
@@ -26,6 +25,7 @@ export default function Home() {
 					setIsSearching={setIsSearching}
 				/>
 			</div>
+
 			<div className="styled-img top-left">
 				<Image src="/cloud1.svg" width={300} height={300} layout="fixed" />
 			</div>
@@ -84,9 +84,16 @@ const StyledHome = styled(StyledContainer)`
 	}
 
 	.routes {
+		display: flex;
+		align-items: center;
 		position: relative;
 		text-align: center;
 		z-index: 1;
+
+		.type-in {
+			display: flex;
+			position: relative;
+		}
 	}
 
 	@media (max-width: 1400px) {

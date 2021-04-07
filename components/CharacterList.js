@@ -20,4 +20,6 @@ const CharacterListContainer = styled.div`
 	grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
 	gap: 2rem;
 	width: 100%;
+	max-width: 1440px;
+	padding: 2rem;
 `;

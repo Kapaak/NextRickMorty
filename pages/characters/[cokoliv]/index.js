@@ -6,7 +6,7 @@ import Image from "next/image";
 import { StyledContainer } from "../../../styles/GlobalStyles";
 
 export default function Character({ character }) {
-	console.log(character);
+	// console.log(character);
 	const characterOriginUpdate = () => {
 		const newChar = character.origin.name;
 		return newChar.replace(/ *\([^)]*\) */g, "");
@@ -42,13 +42,25 @@ export default function Character({ character }) {
 	);
 }
 
+// export const getStaticProps = async context => {
+// 	//tady fetchnu data pro tuto stranku a pro vsechny mozny iterace tehle stranky
+// 	const res = await axios.get(
+// 		`https://rickandmortyapi.com/api/character/${context.params.cokoliv}`
+// 	);
+// 	const character = await res.data;
+
+// 	return {
+// 		props: {
+// 			character,
+// 		},
+// 	};
+// };
 export const getStaticProps = async context => {
 	//tady fetchnu data pro tuto stranku a pro vsechny mozny iterace tehle stranky
 	const res = await axios.get(
 		`https://rickandmortyapi.com/api/character/${context.params.cokoliv}`
 	);
 	const character = await res.data;
-
 	return {
 		props: {
 			character,
@@ -58,8 +70,14 @@ export const getStaticProps = async context => {
 
 export const getStaticPaths = async () => {
 	const res = await axios.get(`https://rickandmortyapi.com/api/character/`);
-	const characters = await res.data.results;
-	const ids = characters.map(character => character.id);
+
+	//tady musim udelat array vsech pagi, ktery budou dostupny (671prvku v tomto pripade)
+	const ids = [];
+	const lastId = res.data.info.count;
+	for (let i = 1; i <= lastId; i++) {
+		ids.push(i);
+	}
+
 	const paths = ids.map(id => ({ params: { cokoliv: id.toString() } }));
 
 	return {
@@ -67,6 +85,18 @@ export const getStaticPaths = async () => {
 		fallback: false,
 	};
 };
+// export const getStaticPaths = async () => {
+// 	const res = await axios.get(`https://rickandmortyapi.com/api/character/`);
+// 	const characters = await res.data.results;
+// 	const ids = characters.map(character => character.id);
+
+// 	const paths = ids.map(id => ({ params: { cokoliv: id.toString() } }));
+// 	console.log(ids);
+// 	return {
+// 		paths,
+// 		fallback: false,
+// 	};
+// };
 
 const StyledCharacter = styled(StyledContainer)`
 	.character-container {

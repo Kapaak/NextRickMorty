@@ -34,7 +34,6 @@ export default GlobalStyles;
 export const StyledContainer = styled.div`
 	background-color: var(--first-color);
 	min-height: 100vh;
-	height: 100vh;
 	display: flex;
 	justify-content: center;
 	align-items: center;
