@@ -1,28 +1,15 @@
 import Link from "next/link";
-import styled from "styled-components";
+//style
+import { StyledNav } from "../styles/GlobalStyles";
 
 const Nav = () => {
 	return (
-		<StyledLink>
+		<StyledNav>
 			<Link href="/">
 				<a>Rick & Morty</a>
 			</Link>
-		</StyledLink>
+		</StyledNav>
 	);
 };
 
 export default Nav;
-
-const StyledLink = styled.div`
-	position: relative;
-	display: block;
-	color: red;
-	background-color: var(--first-color);
-	padding: 1rem;
-
-	a {
-		color: var(--second-color);
-		text-decoration: none;
-		font-size: 1.8rem;
-	}
-`;

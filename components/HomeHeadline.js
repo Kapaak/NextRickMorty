@@ -1,14 +1,13 @@
+//library
+import React, { useState, useEffect, memo } from "react";
+import Link from "next/link";
+import axios from "axios";
 //components
 import Button from "../components/Button";
 import Submit from "./Submit";
 import CustomAutoSuggest from "./CustomAutoSuggest";
 
-//import
-import React, { useState, useEffect, memo } from "react";
-import Link from "next/link";
-import axios from "axios";
-
-function fetchMetaData(setData) {
+function fetchData(setData) {
 	let pagesRequired = 0;
 
 	axios.get("https://rickandmortyapi.com/api/character").then(resp => {
@@ -35,7 +34,7 @@ const HomeHeadline = ({ isSearching, setIsSearching }) => {
 	const [data, setData] = useState([]);
 
 	useEffect(() => {
-		fetchMetaData(setData);
+		fetchData(setData);
 	}, []);
 	return (
 		<>
@@ -52,7 +51,7 @@ const HomeHeadline = ({ isSearching, setIsSearching }) => {
 				) : (
 					<Button
 						onClick={() => {
-							setIsSearching(search => !search);
+							setIsSearching(searching => !searching);
 						}}
 						primary
 					>

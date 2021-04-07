@@ -1,7 +1,6 @@
 //libraries
 import React, { useState } from "react";
 import styled from "styled-components";
-import axios from "axios";
 //components
 import HomeHeadline from "../components/HomeHeadline";
 //styles

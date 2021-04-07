@@ -6,7 +6,6 @@ import Image from "next/image";
 import { StyledContainer } from "../../../styles/GlobalStyles";
 
 export default function Character({ character }) {
-	// console.log(character);
 	const characterOriginUpdate = () => {
 		const newChar = character.origin.name;
 		return newChar.replace(/ *\([^)]*\) */g, "");
@@ -36,7 +35,6 @@ export default function Character({ character }) {
 					width={450}
 					height={500}
 				/>
-				{/* <img src={character.image} alt={character.name} /> */}
 			</div>
 		</StyledCharacter>
 	);

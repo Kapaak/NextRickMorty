@@ -1,19 +1,7 @@
-import styled from "styled-components";
+import { StyledSubmit } from "../styles/GlobalStyles";
 
 const Input = () => {
-	return <StyledButton>submit</StyledButton>;
+	return <StyledSubmit>submit</StyledSubmit>;
 };
-
-const StyledButton = styled.button`
-	color: var(--second-color);
-	background-color: transparent;
-	padding: 1rem 2rem 1rem 1rem;
-	font-size: 2rem;
-	border: 1px solid var(--third-color);
-	border-left: none;
-	border-radius: 0 0.8rem 0.8rem 0;
-	outline: none;
-	cursor: pointer;
-`;
 
 export default Input;

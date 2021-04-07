@@ -1,5 +1,5 @@
-//libraries
-import styled from "styled-components";
+//style
+import { CharacterListContainer } from "../styles/GlobalStyles";
 //components
 import Character from "./Character";
 
@@ -14,12 +14,3 @@ const CharacterList = ({ characters }) => {
 };
 
 export default CharacterList;
-
-const CharacterListContainer = styled.div`
-	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
-	gap: 2rem;
-	width: 100%;
-	max-width: 1440px;
-	padding: 2rem;
-`;
