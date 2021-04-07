@@ -86,6 +86,7 @@ const StyledHome = styled(StyledContainer)`
 	.routes {
 		display: flex;
 		align-items: center;
+		justify-content: center;
 		position: relative;
 		text-align: center;
 		z-index: 1;

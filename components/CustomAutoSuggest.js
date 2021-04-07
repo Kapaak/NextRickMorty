@@ -4,33 +4,44 @@ import { useRouter } from "next/router";
 
 const CustomAutoSuggest = ({ data }) => {
 	const [state, setState] = useState({ suggestions: [], text: "" });
-	// const items = ["David", "Damien", "Sara", "Jane"];
-	const items = [...data].map(el => el.name);
+	const items = [...data];
 	const { suggestions, text } = state;
 	const router = useRouter();
-	console.log(router);
 
 	const onTextChanged = e => {
 		const value = e.target.value;
 		const newState = { ...state };
 		let suggestions = [];
+
 		if (value.length > 0) {
 			const regex = new RegExp(`^${value}`, "i");
-			suggestions = items.sort().filter(v => regex.test(v));
+			suggestions = items
+				.sort(function (a, b) {
+					if (a.name < b.name) {
+						return -1;
+					}
+					if (a.name > b.name) {
+						return 1;
+					}
+					return 0;
+				})
+				.filter(v => regex.test(v.name));
 		}
+		// const newsug = suggestions.map(el => {
+		// 	return {
+		// 		name: el.name,
+		// 		id: el.id,
+		// 	};
+		// });
+
 		setState({ ...newState, suggestions, text: value });
 	};
 
 	const suggestionSelected = value => {
 		const newState = { ...state };
 		setState({ ...newState, text: value, suggestions: [] });
-		console.log(value, " is selected");
-		const findId = [...data].find(el => {
-			return el.name === value;
-		});
-		console.log(findId.id);
 		router.push({
-			pathname: `/characters/${findId.id}`,
+			pathname: `/characters/${value.id}`,
 		});
 	};
 
@@ -42,7 +53,7 @@ const CustomAutoSuggest = ({ data }) => {
 			<ul>
 				{suggestions.map((item, index) => (
 					<li onClick={() => suggestionSelected(item)} key={index}>
-						{item}
+						{item.name}
 					</li>
 				))}
 			</ul>
@@ -78,10 +89,37 @@ const StyledInput = styled.div`
 		width: 100%;
 		border: 1px solid var(--third-color);
 		border-radius: 0.8rem;
+		overflow: hidden;
+		max-height: 18rem;
+		overflow-y: auto;
+		z-index: 10;
+
+		scrollbar-gutter: stable;
+
+		&::-webkit-scrollbar {
+			width: 0.8rem;
+		}
+
+		&::-webkit-scrollbar-track {
+			/* box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3); */
+		}
+
+		&::-webkit-scrollbar-thumb {
+			background-color: var(--second-color);
+			border-right: 5px solid var(--first-color);
+		}
+
 		li {
 			font-size: 2rem;
 			padding: 1rem 1rem 1rem 2rem;
 			color: var(--second-color);
+			list-style: none;
+			text-align: left;
+			&:hover {
+				background-color: var(--second-color);
+				color: var(--first-color);
+				cursor: pointer;
+			}
 		}
 	}
 `;
