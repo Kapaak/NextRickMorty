@@ -1,6 +1,7 @@
 //library
 import React, { useState } from "react";
 import { useRouter } from "next/router";
+import { motion } from "framer-motion";
 //styles
 import { StyledInput } from "../styles/GlobalStyles";
 
@@ -57,7 +58,14 @@ const CustomAutoSuggest = ({ data }) => {
 
 	return (
 		<StyledInput>
-			<input value={text} onChange={e => onTextChanged(e)} type="text" />
+			<motion.input
+				initial={{ opacity: 0, x: -35 }}
+				animate={{ opacity: 1, x: 0 }}
+				transition={{ duration: 0.6 }}
+				value={text}
+				onChange={e => onTextChanged(e)}
+				type="text"
+			/>
 			{renderSuggestions()}
 		</StyledInput>
 	);

@@ -2,6 +2,7 @@
 import React, { useState, useEffect, memo } from "react";
 import Link from "next/link";
 import axios from "axios";
+import { motion } from "framer-motion";
 //components
 import Button from "../components/Button";
 import Submit from "./Submit";
@@ -38,11 +39,21 @@ const HomeHeadline = ({ isSearching, setIsSearching }) => {
 	}, []);
 	return (
 		<>
-			<div className="headline">
+			<motion.div
+				initial={{ x: 100, opacity: 0 }}
+				animate={{ x: 0, opacity: 1 }}
+				transition={{ duration: 0.6 }}
+				className="headline"
+			>
 				<h2>Rick and Morty</h2>
 				<h3>character database</h3>
-			</div>
-			<div className="routes">
+			</motion.div>
+			<motion.div
+				initial={{ y: 100, opacity: 0 }}
+				animate={{ y: 0, opacity: 1 }}
+				transition={{ duration: 0.6, delay: 0.6 }}
+				className="routes"
+			>
 				{isSearching ? (
 					<div className="type-in">
 						<CustomAutoSuggest data={data} />
@@ -64,7 +75,7 @@ const HomeHeadline = ({ isSearching, setIsSearching }) => {
 						<a>characters</a>
 					</Link>
 				</Button>
-			</div>
+			</motion.div>
 		</>
 	);
 };

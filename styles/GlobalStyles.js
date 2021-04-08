@@ -1,5 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 import styled from "styled-components";
+import { motion } from "framer-motion";
 
 const GlobalStyles = createGlobalStyle`
 *,
@@ -31,7 +32,7 @@ body {
 
 export default GlobalStyles;
 
-export const StyledContainer = styled.div`
+export const StyledContainer = styled(motion.div)`
 	background-color: var(--first-color);
 	min-height: 100vh;
 	display: flex;
@@ -40,7 +41,7 @@ export const StyledContainer = styled.div`
 	flex-direction: column;
 `;
 
-export const StyledButton = styled.button`
+export const StyledButton = styled(motion.button)`
 	background-color: transparent;
 	padding: 1rem 2rem;
 	color: var(--second-color);
@@ -56,7 +57,7 @@ export const StyledButton = styled.button`
 	}
 `;
 
-export const StyledSubmit = styled.button`
+export const StyledSubmit = styled(motion.button)`
 	color: var(--second-color);
 	background-color: transparent;
 	padding: 1rem 2rem 1rem 1rem;

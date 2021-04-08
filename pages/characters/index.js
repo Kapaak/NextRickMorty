@@ -60,7 +60,7 @@ export default function Home() {
 	};
 
 	return (
-		<CharactersContainer>
+		<CharactersContainer exit={{ opacity: 0 }}>
 			{data[counter] ? <CharacterList characters={data[counter]} /> : null}
 			<div
 				className="buttons"

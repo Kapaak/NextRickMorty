@@ -1,6 +1,7 @@
 //libraries
 import React, { useState } from "react";
 import styled from "styled-components";
+import { motion } from "framer-motion";
 //components
 import HomeHeadline from "../components/HomeHeadline";
 //styles
@@ -16,7 +17,7 @@ export default function Home() {
 		if (isClickOutside) setIsSearching(false);
 	};
 	return (
-		<StyledHome onClick={resetIsSearching}>
+		<StyledHome exit={{ opacity: 0 }} onClick={resetIsSearching}>
 			<div></div>
 			<div>
 				<HomeHeadline
@@ -25,16 +26,43 @@ export default function Home() {
 				/>
 			</div>
 
-			<div className="styled-img top-left">
+			<motion.div
+				animate={{ x: [20, 0, 20] }}
+				transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+				whileHover={{ x: 100, y: 20 }}
+				className="styled-img top-left"
+			>
 				<Image src="/cloud1.svg" width={300} height={300} layout="fixed" />
-			</div>
-			<div className="styled-img top-right">
+			</motion.div>
+			<motion.div
+				animate={{ x: [20, 0, 20], y: [10, 0, 10] }}
+				transition={{
+					repeat: Infinity,
+					duration: 2,
+					ease: "easeInOut",
+					delay: 1,
+				}}
+				className="styled-img top-right"
+			>
 				<Image src="/cloud2.svg" width={500} height={300} layout="fixed" />
-			</div>
-			<div className="styled-img bottom-right">
+			</motion.div>
+			<motion.div
+				animate={{ x: [20, 0, 20] }}
+				transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+				className="styled-img bottom-right"
+			>
 				<Image src="/cloud1.svg" width={500} height={300} layout="fixed" />
-			</div>
-			<StyledCircle />
+			</motion.div>
+			<StyledCircle
+				animate={{
+					boxShadow: [
+						`5px -7px 33px var(--second-color)`,
+						`10px -15px 50px var(--second-color)`,
+						`5px -7px 33px var(--second-color)`,
+					],
+				}}
+				transition={{ duration: 2, ease: "easeInOut", repeat: Infinity }}
+			/>
 		</StyledHome>
 	);
 }
@@ -60,7 +88,6 @@ const StyledHome = styled(StyledContainer)`
 		&.bottom-right {
 			bottom: 4rem;
 			right: 10rem;
-			transform: rotate(160deg);
 		}
 	}
 	.headline {
@@ -154,7 +181,7 @@ const StyledHome = styled(StyledContainer)`
 	}
 `;
 
-const StyledCircle = styled.div`
+const StyledCircle = styled(motion.div)`
 	width: 90rem;
 	height: 90rem;
 	border-radius: 50%;
